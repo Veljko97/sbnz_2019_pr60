@@ -1,4 +1,4 @@
-package drools.spring.example;
+package com.law.and.order;
 
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import drools.spring.example.facts.Item;
+import com.law.and.order.facts.Item;
 
 
 @Service

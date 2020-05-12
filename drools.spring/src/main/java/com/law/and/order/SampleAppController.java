@@ -1,4 +1,4 @@
-package drools.spring.example;
+package com.law.and.order;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import drools.spring.example.facts.Item;
+import com.law.and.order.facts.Item;
 
 @RestController
 public class SampleAppController {

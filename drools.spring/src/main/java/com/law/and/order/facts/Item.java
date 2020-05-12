@@ -1,4 +1,4 @@
-package drools.spring.example.facts;
+package com.law.and.order.facts;
 
 import java.io.Serializable;
 import java.util.Objects;

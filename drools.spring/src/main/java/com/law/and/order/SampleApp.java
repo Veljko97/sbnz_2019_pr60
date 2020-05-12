@@ -1,4 +1,4 @@
-package drools.spring.example;
+package com.law.and.order;
 
 import java.util.Arrays;
 

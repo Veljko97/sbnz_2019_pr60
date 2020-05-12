@@ -1,6 +1,6 @@
 package drools.spring.rules;
 
-import drools.spring.example.facts.Item;
+import com.law.and.order.facts.Item;
 
 
 rule "Classify Item - Low Range"

@@ -14,21 +14,12 @@ import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication
-public class SampleApp {
+public class LawAndOrder {
 	
-	private static Logger log = LoggerFactory.getLogger(SampleApp.class);
+	private static Logger log = LoggerFactory.getLogger(LawAndOrder.class);
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(SampleApp.class, args); 
-
-        String[] beanNames = ctx.getBeanDefinitionNames();
-        Arrays.sort(beanNames);
-
-        StringBuilder sb = new StringBuilder("Application beans:\n");
-        for (String beanName : beanNames) {
-            sb.append(beanName + "\n");
-        }
-        log.info(sb.toString());
+		ApplicationContext ctx = SpringApplication.run(LawAndOrder.class, args); 
 	}
 	
 	@Bean

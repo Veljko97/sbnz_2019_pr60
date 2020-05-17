@@ -1,0 +1,134 @@
+//created on: May 17, 2020
+package drools.spring.rules
+
+//list any import classes here.
+import com.law.and.order.facts.Action;
+import com.law.and.order.facts.CrimeClasification;
+import com.law.and.order.facts.enums.ActionTypes;
+import com.law.and.order.facts.enums.CrimeTypes;
+import java.util.List;
+import java.util.ArrayList;
+
+
+//declare any global variables here
+
+global List teskoUbistvo;
+
+rule "Initialize"
+	salience 10000
+	when
+	then
+		ArrayList<java.lang.String> actions = new ArrayList<>();
+		actions.add(ActionTypes.SVIREPO_IZVRSAVANJE.getValue());
+		actions.add(ActionTypes.UBISTVO_DETA.getValue());
+		actions.add(ActionTypes.UBISTVO_TRUDNE_ZENE.getValue());
+		actions.add(ActionTypes.UBISTVO_SLUZBENOG_LICA.getValue());
+		actions.add(ActionTypes.UBISTVO_ZLOSTAVLJANOG_CLANA_PORODICE.getValue());
+		actions.add(ActionTypes.SVIREPO_IZVRSAVANJE.getValue());
+		kcontext.getKieRuntime().setGlobal("teskoUbistvo", actions);
+end
+
+rule "Ubistvo"
+	salience 1000
+    when
+       	$action: Action(type == ActionTypes.LISENJE_ZIVOTA)
+    then
+	  insert(new CrimeClasification(CrimeTypes.UBISTVO));
+end
+
+rule "Tesko Ubistvo"
+	salience 100
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
+        $action: Action( )
+        eval( teskoUbistvo.contains($action.getType().getValue()))
+    then
+      $crime.setCrimeType(CrimeTypes.TESKO_UBISTVO);
+      update($crime)
+end
+
+rule "Ubistvo na mah"
+	salience 10
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
+        Action( type == ActionTypes.DOVEDEN_U_STANJE_RADRAZENOSTI )
+    then
+      $crime.setCrimeType(CrimeTypes.UBISTVO_NA_MAH);
+      update($crime)
+end
+
+rule "Ubistvo deteta pri porodjaju"
+	salience 9
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
+        Action( type == ActionTypes.MAJKA_ZRTVE )
+        Action( type == ActionTypes.ZA_VREME_ILI_NEPOSREDNO_NAKON_PORODJAJA )
+    then
+      $crime.setCrimeType(CrimeTypes.UBISTVO_DETETA_PRI_PORODJAJU);
+      update($crime)
+end
+
+rule "Nehatno lisenje zivota"
+	salience 8
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
+        Action( type == ActionTypes.BEZ_NAMERE )
+    then
+      $crime.setCrimeType(CrimeTypes.NEHATNO_LISENJE_ZIVOTA);
+      update($crime)
+end
+
+rule "Nedozvoljen prekid trudonoce"
+	salience 8
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
+        Action( type == ActionTypes.NEPROPISNO_IZVRSAVANJE_PREKIDA_TRUDONOCE )
+    then
+      $crime.setCrimeType(CrimeTypes.NEDOZVOLJEN_PREKID_TRUDONOCE);
+      update($crime)
+end
+
+rule "Laka telesna povreda"
+	salience 999
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.TELESNA_POVREDA )
+    then
+      insert(new CrimeClasification(CrimeTypes.LAKA_TELESNA_POVREDA));
+end
+
+rule "Teska telesna povreda"
+	salience 10
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.LAKA_TELESNA_POVREDA))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.LAKA_TELESNA_POVREDA)
+        Action( type == ActionTypes.TESKO_ZDRAVSTVENO_STANJE_ZRTVE )
+    then
+      $crime.setCrimeType(CrimeTypes.TESKA_TELESNA_POVREDA);
+      update($crime)
+end
+
+rule "Ucestvovanje u tuci"
+	salience 998
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.UCESTVOVAO_U_TUCU )
+    then
+      insert(new CrimeClasification(CrimeTypes.UCESTVOVANJE_U_TUCI));
+end
+
+rule "Ugrozavanje opasnim orudjem pri tuci i svadji"
+	salience 10
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.UCESTVOVANJE_U_TUCI))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.UCESTVOVANJE_U_TUCI)
+        Action( type == ActionTypes.PRISUTSVO_OPASNOG_ORUDJA )
+    then
+      $crime.setCrimeType(CrimeTypes.UGROZAVANJE_OPASNIM_ORUDJEM_PRI_TUCI);
+      update($crime)
+end

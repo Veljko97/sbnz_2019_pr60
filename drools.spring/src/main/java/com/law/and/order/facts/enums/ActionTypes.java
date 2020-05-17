@@ -5,7 +5,7 @@ public enum ActionTypes {
 	SVIREPO_IZVRSAVANJE("Svirepo izvrsavanje"),
 	UBISTVO_DETA("Ubistvo deta"),
 	UBISTVO_TRUDNE_ZENE("Ubistvo trudne zene"),
-	UBISTVO_SLUZBENOG_LICA("Ubistvo sluzbenog lica pri vrsenju duznosti"),
+	UBISTVO_SLUZBENOG_LICA_PRI_VRSENJU_DUZNOSTI("Ubistvo sluzbenog lica pri vrsenju duznosti"),
 	UBISTVO_ZLOSTAVLJANOG_CLANA_PORODICE("Ubistvo zlostavljanog clana porodice"),
 	DOVEDEN_U_STANJE_RADRAZENOSTI("Doveden u stanje radrazenosti"),
 	MAJKA_ZRTVE("Majka zrtve"),

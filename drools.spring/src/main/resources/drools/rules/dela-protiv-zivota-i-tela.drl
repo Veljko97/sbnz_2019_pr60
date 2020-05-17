@@ -22,7 +22,7 @@ rule "Initialize"
 		actions.add(ActionTypes.SVIREPO_IZVRSAVANJE.getValue());
 		actions.add(ActionTypes.UBISTVO_DETA.getValue());
 		actions.add(ActionTypes.UBISTVO_TRUDNE_ZENE.getValue());
-		actions.add(ActionTypes.UBISTVO_SLUZBENOG_LICA.getValue());
+		actions.add(ActionTypes.UBISTVO_SLUZBENOG_LICA_PRI_VRSENJU_DUZNOSTI.getValue());
 		actions.add(ActionTypes.UBISTVO_ZLOSTAVLJANOG_CLANA_PORODICE.getValue());
 		actions.add(ActionTypes.SVIREPO_IZVRSAVANJE.getValue());
 		kcontext.getKieRuntime().setGlobal("teskoUbistvo", actions);

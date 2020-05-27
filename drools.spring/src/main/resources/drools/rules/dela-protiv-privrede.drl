@@ -1,0 +1,99 @@
+//created on: May 17, 2020
+package drools.spring.rules
+
+//list any import classes here.
+import com.law.and.order.facts.Action;
+import com.law.and.order.facts.CrimeClasification;
+import com.law.and.order.facts.enums.ActionTypes;
+import com.law.and.order.facts.enums.CrimeTypes;
+import java.util.List;
+import java.util.ArrayList;
+
+
+//declare any global variables here
+
+rule "Poreska utaja"
+	salience 10
+    when
+       	$action: Action(type == ActionTypes.POREZ_NIJE_PRIJAVLJEN_U_POTPUNOSTI.getValue())
+    then
+	  insert(new CrimeClasification(CrimeTypes.PORESKA_UTAJA));
+end
+
+rule "Prevara u osiguranju"
+	salience 9
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.NAPLACENA_UGOVORENA_SUMA.getValue() )
+        Action( type == ActionTypes.NAMERNO_OSTECENO_OSIGURANO.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.PREVARA_U_OSIGURANJU));
+end
+
+rule "Neuplacivanje poreza po odbitku"
+	salience 8
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.POREZ_PRIJAVLJEN_ALI_NIJE_UPLACEN.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.NEUPLACIVANJE_POREZA_PO_ODBITKU));
+end
+
+rule "Primanje mita u obavljanju privredne delatnosti"
+	salience 7
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.DOBIJE_POKLON.getValue() )
+        Action( type == ActionTypes.DAO_USLUGU_U_PRIVREDI.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.PRIMANJE_MITA_U_OBAVLJANJU_PRIVREDNE_DELATNOSTI));
+end
+
+rule "Davanje mita u obavljanju privredne delatnosti"
+	salience 6
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.DAO_POKLON.getValue() )
+        Action( type == ActionTypes.PRIMIO_USLUGU_U_PRIVREDI.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.PRIMANJE_MITA_U_OBAVLJANJU_PRIVREDNE_DELATNOSTI));
+end
+
+rule "Prouzrokovanje stecaja"
+	salience 5
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.IZAZVAO_STECAJ.getValue() )
+        Action( type == ActionTypes.PRIBAVIO_IMOVINSKU_KORIST.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.PROUZROKOVANJE_STECAJA));
+end
+
+rule "Krijuncarenje"
+	salience 4
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.PRENEO_PREKO_GRANICE_BEZ_DOZVOLE.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.KRIJUNCARENJE));
+end
+
+rule "Nedozvoljena trgovina"
+	salience 3
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.BAVIO_SE_TRGOVINOM.getValue() )
+        Action( type == ActionTypes.NEMA_DOZVOLU.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.NEDOZVOLJENA_TRGOVINA));
+end
+
+rule "Nedozvoljena proizvodjna"
+	salience 3
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.BAVIO_SE_PROIZVODNJOM.getValue() )
+        Action( type == ActionTypes.NEMA_DOZVOLU.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.NEDOZVOLJENA_PROIZVODJNA));
+end

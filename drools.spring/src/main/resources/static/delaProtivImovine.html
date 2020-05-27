@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Law and Order</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Law and Order</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="min-height: 500px">
+
+    <div class="starter-template">
+        <h1>Otkaci svoje postupke</h1>
+
+        <div id="feedback"></div>
+
+        <form class="form-horizontal" id="check-crime-form">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="OTUDJENJE_IMOVINE">
+                <label class="custom-control-label" for="OTUDJENJE_IMOVINE">Otudjenje imovine</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="DEO_GRUPE">
+                <label class="custom-control-label" for="DEO_GRUPE">Deo grupe</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="OPASAN_I_DRZAK_NACIN">
+                <label class="custom-control-label" for="OPASAN_I_DRZAK_NACIN">Opasan i drzak nacin</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="ZA_VREME_ELEMENTARNIH_NEPOGODA">
+                <label class="custom-control-label" for="ZA_VREME_ELEMENTARNIH_NEPOGODA">Za vreme elementarnih nepogoda</label>
+            </div>  
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="POSEDOVANJE_ORUZIJA">
+                <label class="custom-control-label" for="POSEDOVANJE_ORUZIJA">Posedovanje oruzija</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="UPOTREBA_ORUZIJA_RADI_ZADRZAVANJ_IMOVINE">
+                <label class="custom-control-label" for="UPOTREBA_ORUZIJA_RADI_ZADRZAVANJ_IMOVINE">Upotreba oruzija radi zadrzavanj imovine</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="UPOTREBA_ORUZIJA_RADI_PRISVAJANJA_IMOVINE">
+                <label class="custom-control-label" for="UPOTREBA_ORUZIJA_RADI_PRISVAJANJA_IMOVINE">Upotreba oruzija radi prisvajanja imovine</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="PRISVAJANJE_TUDJE_IMOVINE">
+                <label class="custom-control-label" for="PRISVAJANJE_TUDJE_IMOVINE">Prisvajanje tudje imovine</label>
+            </div>
+            PRIBAVLJANJE_IMOVINE("Pribavljanje imovine"),
+            DAVANJE_NA_ZAJAM("Davanje na zajam"),
+            VISOKA_KAMATA("Visoka kamata"),   
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="DOVODJENJE_OSTECENOG_U_ZABLUDU_RADI_STICANJA_IMOVINE">
+                <label class="custom-control-label" for="DOVODJENJE_OSTECENOG_U_ZABLUDU_RADI_STICANJA_IMOVINE">Dovodjenje ostecenog u zabludu radi sticanja imovine</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="PRETNJA_PO_ZIVOT_ZDRAVLJE_ILI_UGLED">
+                <label class="custom-control-label" for="PRETNJA_PO_ZIVOT_ZDRAVLJE_ILI_UGLED">Pretnja po zivot, zdravlje ili ugled</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="PRIBAVLJANJE_IMOVINE">
+                <label class="custom-control-label" for="PRIBAVLJANJE_IMOVINE">Pribavljanje imovine</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="DAVANJE_NA_ZAJAM">
+                <label class="custom-control-label" for="DAVANJE_NA_ZAJAM">Davanje na zajam</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="VISOKA_KAMATA">
+                <label class="custom-control-label" for="VISOKA_KAMATA">Visoka kamata</label>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-search"
+                            class="btn btn-primary btn-lg">Submit
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<script type="text/javascript"
+        src="webjars/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript" src="main.js"></script>
+
+</body>
+</html>

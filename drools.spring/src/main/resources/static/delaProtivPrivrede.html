@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Law and Order</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Law and Order</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="min-height: 500px">
+
+    <div class="starter-template">
+        <h1>Otkaci svoje postupke</h1>
+
+        <div id="feedback"></div>
+        <form class="form-horizontal" id="check-crime-form">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="POREZ_NIJE_PRIJAVLJEN_U_POTPUNOSTI">
+                <label class="custom-control-label" for="POREZ_NIJE_PRIJAVLJEN_U_POTPUNOSTI">Porez nije prijavljen u potpunosti</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="NAPLACENA_UGOVORENA_SUMA">
+                <label class="custom-control-label" for="NAPLACENA_UGOVORENA_SUMA">Naplacena ugovorena suma</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="NAMERNO_OSTECENO_OSIGURANO">
+                <label class="custom-control-label" for="NAMERNO_OSTECENO_OSIGURANO">Namerno osteceno osigurano</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="POREZ_PRIJAVLJEN_ALI_NIJE_UPLACEN">
+                <label class="custom-control-label" for="POREZ_PRIJAVLJEN_ALI_NIJE_UPLACEN">Porez prijavljen, ali nije uplacen</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="DOBIJE_POKLON">
+                <label class="custom-control-label" for="DOBIJE_POKLON">Dobije poklon</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="DAO_USLUGU_U_PRIVREDI">
+                <label class="custom-control-label" for="DAO_USLUGU_U_PRIVREDI">Dao uslugu u privredi</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="DAO_POKLON">
+                <label class="custom-control-label" for="DAO_POKLON">Dao poklon</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="PRIMIO_USLUGU_U_PRIVREDI">
+                <label class="custom-control-label" for="PRIMIO_USLUGU_U_PRIVREDI">Primio uslugu u privredi</label>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="IZAZVAO_STECAJ">
+                <label class="custom-control-label" for="IZAZVAO_STECAJ">Izazvao stecaj</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="PRIBAVIO_IMOVINSKU_KORIST">
+                <label class="custom-control-label" for="PRIBAVIO_IMOVINSKU_KORIST">Pribavio imovinsku korist</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="PRENEO_PREKO_GRANICE_BEZ_DOZVOLE">
+                <label class="custom-control-label" for="PRENEO_PREKO_GRANICE_BEZ_DOZVOLE">Preneo preko granice bez dozvole</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="BAVIO_SE_TRGOVINOM">
+                <label class="custom-control-label" for="BAVIO_SE_TRGOVINOM">Bavio se trgovinom</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="BAVIO_SE_PROIZVODNJOM">
+                <label class="custom-control-label" for="BAVIO_SE_PROIZVODNJOM">Bavio se proizvodnjom</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="NEMA_DOZVOLU">
+                <label class="custom-control-label" for="NEMA_DOZVOLU">Nema dozvolu</label>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-search"
+                            class="btn btn-primary btn-lg">Submit
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<script type="text/javascript"
+        src="webjars/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript" src="main.js"></script>
+
+</body>
+</html>

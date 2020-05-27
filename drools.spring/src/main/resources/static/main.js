@@ -21,6 +21,7 @@ function fire_ajax_submit() {
             let tranform = element.labels[0].innerText;
             tranform = tranform.toUpperCase();
             tranform = tranform.replace(/ /g , "_" );
+            tranform = tranform.replace(/,/g , "" );
             data += "actionTypes="+tranform + "&";
         }
     }
@@ -43,11 +44,8 @@ function fire_ajax_submit() {
         },
         error: function (e) {
 
-            var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-                + e.responseText + "&lt;/pre&gt;";
+            var json = "<h4>Nije zlocin</h4>";
             $('#feedback').html(json);
-
-            console.log("ERROR : ", e);
             $("#btn-search").prop("disabled", false);
 
         }

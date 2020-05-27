@@ -34,6 +34,25 @@ public enum ActionTypes {
 	PRIBAVLJANJE_IMOVINE("Pribavljanje imovine"),
 	DAVANJE_NA_ZAJAM("Davanje na zajam"),
 	VISOKA_KAMATA("Visoka kamata"),
+	
+	
+	//---------------------- Dela protiv privrede --------------------------
+	
+
+	POREZ_NIJE_PRIJAVLJEN_U_POTPUNOSTI("Porez nije prijavljen u potpunosti"),
+	NAPLACENA_UGOVORENA_SUMA("Naplacena ugovorena suma"),
+	NAMERNO_OSTECENO_OSIGURANO("Namerno osteceno osigurano"),
+	POREZ_PRIJAVLJEN_ALI_NIJE_UPLACEN("Porez prijavljen, ali nije uplacen"),
+	DOBIJE_POKLON("Dobije poklon"),
+	DAO_USLUGU_U_PRIVREDI("Dao uslugu u privredi"),
+	DAO_POKLON("Dao poklon"),
+	PRIMIO_USLUGU_U_PRIVREDI("Primio uslugu u privredi"),
+	IZAZVAO_STECAJ("Izazvao stecaj"),
+	PRIBAVIO_IMOVINSKU_KORIST("Pribavio imovinsku korist"),
+	PRENEO_PREKO_GRANICE_BEZ_DOZVOLE("Preneo preko granice bez dozvole"),
+	BAVIO_SE_TRGOVINOM("Bavio se trgovinom"),
+	NEMA_DOZVOLU("Nema dozvolu"),
+	BAVIO_SE_PROIZVODNJOM("Bavio se proizvodnjom")
 	;
 
 	private String value;

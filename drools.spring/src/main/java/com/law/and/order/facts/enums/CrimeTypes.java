@@ -24,6 +24,20 @@ public enum CrimeTypes {
 	PREVARA("Prevaras"),
 	UCENA("Ucena"),
 	ZELENASTVO("Zelenastvo"),
+	
+	
+	//---------------------- Dela protiv privrede --------------------------
+	
+
+	PORESKA_UTAJA("Poreska utaja"),
+	PREVARA_U_OSIGURANJU("Prevara u osiguranju"),
+	NEUPLACIVANJE_POREZA_PO_ODBITKU("Neuplacivanje poreza po odbitku"),
+	PRIMANJE_MITA_U_OBAVLJANJU_PRIVREDNE_DELATNOSTI("Primanje mita u obavljanju privredne delatnosti"),
+	DAVANJE_MITA_U_OBAVLJANJU_PRIVREDNE_DELATNOSTI("Davanje mita u obavljanju privredne delatnosti"),
+	PROUZROKOVANJE_STECAJA("Prouzrokovanje stecaja"),
+	KRIJUNCARENJE("Krijuncarenje"),
+	NEDOZVOLJENA_TRGOVINA("Nedozvoljena trgovina"),
+	NEDOZVOLJENA_PROIZVODJNA("Nedozvoljena proizvodjna"),
 	;
 
 	

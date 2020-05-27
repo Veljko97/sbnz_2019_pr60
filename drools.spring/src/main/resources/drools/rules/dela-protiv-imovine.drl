@@ -1,0 +1,110 @@
+//created on: May 17, 2020
+package drools.spring.rules
+
+//list any import classes here.
+import com.law.and.order.facts.Action;
+import com.law.and.order.facts.CrimeClasification;
+import com.law.and.order.facts.enums.ActionTypes;
+import com.law.and.order.facts.enums.CrimeTypes;
+import java.util.List;
+import java.util.ArrayList;
+
+
+//declare any global variables here
+
+global List teskaKradja;
+
+rule "Initialize 2"
+	salience 10000
+	when
+	then
+		ArrayList<java.lang.String> actions = new ArrayList<>();
+		actions.add(ActionTypes.DEO_GRUPE.getValue());
+		actions.add(ActionTypes.OPASAN_I_DRZAK_NACIN.getValue());
+		actions.add(ActionTypes.ZA_VREME_ELEMENTARNIH_NEPOGODA.getValue());
+		actions.add(ActionTypes.POSEDOVANJE_ORUZIJA.getValue());
+		kcontext.getKieRuntime().setGlobal("teskaKradja", actions);
+end
+
+rule "Kradja"
+	salience 1000
+    when
+       	$action: Action(type == ActionTypes.OTUDJENJE_IMOVINE.getValue())
+    then
+	  insert(new CrimeClasification(CrimeTypes.KRADJA));
+end
+
+rule "Tesko Kradja"
+	salience 100
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.KRADJA))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.KRADJA)
+        $action: Action( )
+        eval( teskaKradja.contains($action.getType()))
+    then
+      $crime.setCrimeType(CrimeTypes.TESKA_KRADJA);
+      update($crime)
+end
+
+rule "Razbojnicka kradja"
+	salience 10
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.KRADJA))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.KRADJA)
+        Action( type == ActionTypes.UPOTREBA_ORUZIJA_RADI_ZADRZAVANJ_IMOVINE.getValue() )
+    then
+      $crime.setCrimeType(CrimeTypes.RAZBOJNICKA_KRADJA);
+      update($crime)
+end
+
+rule "Razbojnistvo"
+	salience 9
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.KRADJA))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.KRADJA)
+        Action( type == ActionTypes.UPOTREBA_ORUZIJA_RADI_PRISVAJANJA_IMOVINE.getValue() )
+    then
+      $crime.setCrimeType(CrimeTypes.RAZBOJNISTVO);
+      update($crime)
+end
+
+
+rule "Ucena"
+	salience 7
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.KRADJA))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.KRADJA)
+        Action( type == ActionTypes.PRETNJA_PO_ZIVOT_ZDRAVLJE_ILI_UGLED.getValue() )
+    then
+      $crime.setCrimeType(CrimeTypes.UCENA);
+      update($crime)
+end
+
+rule "Utaja"
+	salience 999
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.PRISVAJANJE_TUDJE_IMOVINE.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.UTAJA));
+end
+
+rule "Prevara"
+	salience 998
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.DOVODJENJE_OSTECENOG_U_ZABLUDU_RADI_STICANJA_IMOVINE.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.PREVARA));
+end
+
+rule "Zelenastvo"
+	salience 997
+    when
+    	not(exists(CrimeClasification()))
+        Action( type == ActionTypes.PRIBAVLJANJE_IMOVINE.getValue() )
+        Action( type == ActionTypes.DAVANJE_NA_ZAJAM.getValue() )
+        Action( type == ActionTypes.VISOKA_KAMATA.getValue() )
+    then
+      insert(new CrimeClasification(CrimeTypes.ZELENASTVO));
+end

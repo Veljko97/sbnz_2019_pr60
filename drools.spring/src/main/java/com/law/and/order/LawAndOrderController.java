@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import com.law.and.order.facts.CrimeClasification;
+import com.law.and.order.facts.enums.ActionTypesDelaProtivImovine;
 import com.law.and.order.facts.enums.ActionTypes;
 
 @RestController
@@ -25,14 +26,15 @@ public class LawAndOrderController {
 	    }
 
 	@RequestMapping(value = "/actions", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<?> getQuestions(@RequestParam(required = false) ActionTypes[] actionTypes) {
+	public ResponseEntity<?> getCrime(@RequestParam(required = false) ActionTypes[] actionTypes) {
 		
 		if(actionTypes == null || actionTypes.length == 0) {
 			return ResponseEntity.badRequest().build();
 		}
 		
-		CrimeClasification crimeClasification = lawAndOrderService.getClassifiedItem(actionTypes);
+		CrimeClasification crimeClasification = lawAndOrderService.getCrime(actionTypes);
 		return ResponseEntity.ok(crimeClasification);
 	}
+	
 	
 }

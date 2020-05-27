@@ -4,7 +4,7 @@ import com.law.and.order.facts.enums.ActionTypes;
 
 public class Action {
 	
-	private ActionTypes type;
+	private String type;
 	private String description;
 	
 	public Action() {
@@ -12,17 +12,17 @@ public class Action {
 	
 	
 	
-	public Action(ActionTypes type) {
+	public Action(String type) {
 		super();
 		this.type = type;
 	}
 
 
 
-	public ActionTypes getType() {
+	public String getType() {
 		return type;
 	}
-	public void setType(ActionTypes type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	public String getDescription() {

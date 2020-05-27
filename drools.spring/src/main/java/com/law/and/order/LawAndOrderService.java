@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.law.and.order.facts.Action;
 import com.law.and.order.facts.CrimeClasification;
+import com.law.and.order.facts.enums.ActionTypesDelaProtivImovine;
 import com.law.and.order.facts.enums.ActionTypes;
 
 
@@ -26,10 +27,10 @@ public class LawAndOrderService {
         this.kieContainer = kieContainer;
     }
     
-    public CrimeClasification getClassifiedItem(ActionTypes[] actions) {
+    public CrimeClasification getCrime(ActionTypes[] actions) {
         KieSession kieSession = kieContainer.newKieSession("Crime");
         for(ActionTypes action : actions) {
-        	kieSession.insert(new Action(action));
+        	kieSession.insert(new Action(action.getValue()));
         }
         kieSession.fireAllRules();
         Collection<? extends Object> objects =  kieSession.getObjects();

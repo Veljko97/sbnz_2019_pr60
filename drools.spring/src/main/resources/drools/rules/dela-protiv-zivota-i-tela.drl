@@ -31,7 +31,7 @@ end
 rule "Ubistvo"
 	salience 1000
     when
-       	$action: Action(type == ActionTypes.LISENJE_ZIVOTA)
+       	$action: Action(type == ActionTypes.LISENJE_ZIVOTA.getValue())
     then
 	  insert(new CrimeClasification(CrimeTypes.UBISTVO));
 end
@@ -42,7 +42,7 @@ rule "Tesko Ubistvo"
     	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
     	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
         $action: Action( )
-        eval( teskoUbistvo.contains($action.getType().getValue()))
+        eval( teskoUbistvo.contains($action.getType()))
     then
       $crime.setCrimeType(CrimeTypes.TESKO_UBISTVO);
       update($crime)
@@ -53,7 +53,7 @@ rule "Ubistvo na mah"
     when
     	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
     	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
-        Action( type == ActionTypes.DOVEDEN_U_STANJE_RADRAZENOSTI )
+        Action( type == ActionTypes.DOVEDEN_U_STANJE_RADRAZENOSTI.getValue() )
     then
       $crime.setCrimeType(CrimeTypes.UBISTVO_NA_MAH);
       update($crime)
@@ -65,7 +65,7 @@ rule "Ubistvo deteta pri porodjaju"
     	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
     	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
         Action( type == ActionTypes.MAJKA_ZRTVE )
-        Action( type == ActionTypes.ZA_VREME_ILI_NEPOSREDNO_NAKON_PORODJAJA )
+        Action( type == ActionTypes.ZA_VREME_ILI_NEPOSREDNO_NAKON_PORODJAJA.getValue() )
     then
       $crime.setCrimeType(CrimeTypes.UBISTVO_DETETA_PRI_PORODJAJU);
       update($crime)
@@ -76,7 +76,7 @@ rule "Nehatno lisenje zivota"
     when
     	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
     	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
-        Action( type == ActionTypes.BEZ_NAMERE )
+        Action( type == ActionTypes.BEZ_NAMERE.getValue() )
     then
       $crime.setCrimeType(CrimeTypes.NEHATNO_LISENJE_ZIVOTA);
       update($crime)
@@ -87,7 +87,7 @@ rule "Nedozvoljen prekid trudonoce"
     when
     	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
     	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
-        Action( type == ActionTypes.NEPROPISNO_IZVRSAVANJE_PREKIDA_TRUDONOCE )
+        Action( type == ActionTypes.NEPROPISNO_IZVRSAVANJE_PREKIDA_TRUDONOCE.getValue() )
     then
       $crime.setCrimeType(CrimeTypes.NEDOZVOLJEN_PREKID_TRUDONOCE);
       update($crime)
@@ -97,7 +97,7 @@ rule "Laka telesna povreda"
 	salience 999
     when
     	not(exists(CrimeClasification()))
-        Action( type == ActionTypes.TELESNA_POVREDA )
+        Action( type == ActionTypes.TELESNA_POVREDA.getValue() )
     then
       insert(new CrimeClasification(CrimeTypes.LAKA_TELESNA_POVREDA));
 end
@@ -107,7 +107,7 @@ rule "Teska telesna povreda"
     when
     	exists(CrimeClasification(crimeType == CrimeTypes.LAKA_TELESNA_POVREDA))
     	$crime: CrimeClasification(crimeType == CrimeTypes.LAKA_TELESNA_POVREDA)
-        Action( type == ActionTypes.TESKO_ZDRAVSTVENO_STANJE_ZRTVE )
+        Action( type == ActionTypes.TESKO_ZDRAVSTVENO_STANJE_ZRTVE.getValue() )
     then
       $crime.setCrimeType(CrimeTypes.TESKA_TELESNA_POVREDA);
       update($crime)
@@ -117,7 +117,7 @@ rule "Ucestvovanje u tuci"
 	salience 998
     when
     	not(exists(CrimeClasification()))
-        Action( type == ActionTypes.UCESTVOVAO_U_TUCU )
+        Action( type == ActionTypes.UCESTVOVAO_U_TUCU.getValue() )
     then
       insert(new CrimeClasification(CrimeTypes.UCESTVOVANJE_U_TUCI));
 end
@@ -127,7 +127,7 @@ rule "Ugrozavanje opasnim orudjem pri tuci i svadji"
     when
     	exists(CrimeClasification(crimeType == CrimeTypes.UCESTVOVANJE_U_TUCI))
     	$crime: CrimeClasification(crimeType == CrimeTypes.UCESTVOVANJE_U_TUCI)
-        Action( type == ActionTypes.PRISUTSVO_OPASNOG_ORUDJA )
+        Action( type == ActionTypes.PRISUTSVO_OPASNOG_ORUDJA.getValue() )
     then
       $crime.setCrimeType(CrimeTypes.UGROZAVANJE_OPASNIM_ORUDJEM_PRI_TUCI);
       update($crime)

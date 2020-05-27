@@ -10,7 +10,20 @@ public enum CrimeTypes {
 	LAKA_TELESNA_POVREDA("Laka telesna povreda"),
 	TESKA_TELESNA_POVREDA("Teska telesna povreda"),
 	UCESTVOVANJE_U_TUCI("Ucestvovanje u tuci"),
-	UGROZAVANJE_OPASNIM_ORUDJEM_PRI_TUCI("Ugrozavanje opasnim orudjem pri tuci i svadji")
+	UGROZAVANJE_OPASNIM_ORUDJEM_PRI_TUCI("Ugrozavanje opasnim orudjem pri tuci i svadji"),
+	
+	
+	//---------------------- Dela protiv imovine --------------------------
+	
+	
+	KRADJA("Kradja"),
+	TESKA_KRADJA("Teska kradja"),
+	RAZBOJNICKA_KRADJA("Razbojnicka kradja"),
+	RAZBOJNISTVO("Razbojnistvo"),
+	UTAJA("Utaja"),
+	PREVARA("Prevaras"),
+	UCENA("Ucena"),
+	ZELENASTVO("Zelenastvo"),
 	;
 
 	

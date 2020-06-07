@@ -64,7 +64,7 @@ rule "Ubistvo deteta pri porodjaju"
     when
     	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
     	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
-        Action( type == ActionTypes.MAJKA_ZRTVE )
+        Action( type == ActionTypes.MAJKA_ZRTVE.getValue()  )
         Action( type == ActionTypes.ZA_VREME_ILI_NEPOSREDNO_NAKON_PORODJAJA.getValue() )
     then
       $crime.setCrimeType(CrimeTypes.UBISTVO_DETETA_PRI_PORODJAJU);

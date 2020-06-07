@@ -1,58 +1,79 @@
 package com.law.and.order;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.law.and.order.facts.CrimeClasification;
+import com.law.and.order.facts.enums.ActionTypes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.bind.annotation.*;
 
-import com.law.and.order.facts.CrimeClasification;
-import com.law.and.order.facts.enums.ActionTypesDelaProtivImovine;
-import com.law.and.order.facts.enums.ActionTypes;
-
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 @RestController
 public class LawAndOrderController {
-	private static Logger log = LoggerFactory.getLogger(LawAndOrderController.class);
 
-	private final LawAndOrderService lawAndOrderService;
+    private final LawAndOrderService lawAndOrderService;
 
-	@Autowired
-	    public LawAndOrderController(LawAndOrderService sampleService) {
-	        this.lawAndOrderService = sampleService;
-	    }
+    @Autowired
+    public ResourceLoaderService resourceLoaderService;
 
-	@RequestMapping(value = "/actions", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<?> getCrime(@RequestParam(required = false) ActionTypes[] actionTypes) {
-		
-		if(actionTypes == null || actionTypes.length == 0) {
-			return ResponseEntity.badRequest().build();
-		}
-		
-		CrimeClasification crimeClasification = lawAndOrderService.getCrime(actionTypes);
-		return ResponseEntity.ok(crimeClasification);
-	}
+    @Autowired
+    public LawAndOrderController(LawAndOrderService sampleService) {
+        this.lawAndOrderService = sampleService;
+    }
 
-	@RequestMapping(value = "/getRules", method = RequestMethod.GET)
-	public ResponseEntity<?> getRules(@RequestParam(required = true) String ruleSet) throws FileNotFoundException {
-		File file = ResourceUtils.getFile("classpath:drools/rules/" + ruleSet + ".drl");
+    @RequestMapping(value = "/actions", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<?> getCrime(@RequestParam(required = false) ActionTypes[] actionTypes) {
 
-		BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-		String text = "";
-		Scanner scanner = new Scanner(file);
-		while (scanner.hasNext()){
-			text += scanner.nextLine() + '\n';
-		}
-		return  ResponseEntity.ok(text);
-	}
+        if (actionTypes == null || actionTypes.length == 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        CrimeClasification crimeClasification = lawAndOrderService.getCrime(actionTypes);
+        return ResponseEntity.ok(crimeClasification);
+    }
+
+    @RequestMapping(value = "/getRules", method = RequestMethod.GET)
+    public ResponseEntity<?> getRules(@RequestParam(required = true) String ruleSet) throws IOException {
+        Resource resource = resourceLoaderService.resourceLoader.getResource("classpath:drools/rules/" + ruleSet + ".drl");
+//        File file = ResourceUtils.getFile("classpath:drools/rules/" + ruleSet + ".drl");
+        File file  = resource.getFile();
+        String text = "";
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            text += scanner.nextLine() + '\n';
+        }
+        return ResponseEntity.ok(text);
+    }
+
+    @RequestMapping(value = "/saveRules", method = RequestMethod.POST)
+    public ResponseEntity<?> saveRules(@RequestParam(required = true) String ruleSet, @RequestBody String rulesContent) throws IOException {
+        Resource resource = resourceLoaderService.resourceLoader.getResource("classpath:drools/rules/" + ruleSet + ".drl");
+        File file2 = new File("src/main/resources/drools/rules/" + ruleSet + ".drl");
+//		Path path = Paths.get("classpath:drools/rules/" + ruleSet + ".drl").toAbsolutePath().normalize();
+        File file = resource.getFile();
+        if (!file.exists()) {
+            file.createNewFile();
+            file2.createNewFile();
+        }
+
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(rulesContent);
+        fileWriter.flush();
+        fileWriter.close();
+
+        FileWriter fileWriter2 = new FileWriter(file2);
+        fileWriter2.write(rulesContent);
+        fileWriter2.flush();
+        fileWriter2.close();
+        return ResponseEntity.ok().build();
+    }
 }

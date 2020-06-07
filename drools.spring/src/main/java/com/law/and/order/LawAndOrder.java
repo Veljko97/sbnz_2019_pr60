@@ -21,7 +21,7 @@ public class LawAndOrder {
 	private static Logger log = LoggerFactory.getLogger(LawAndOrder.class);
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(LawAndOrder.class, args); 
+		SpringApplication.run(LawAndOrder.class, args);
 	}
 	
 	@Bean

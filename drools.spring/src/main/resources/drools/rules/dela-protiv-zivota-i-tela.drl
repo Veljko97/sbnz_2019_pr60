@@ -39,13 +39,10 @@ end
 rule "Tesko Ubistvo"
 	salience 100
     when
-    	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
-    	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
         $action: Action( )
         eval( teskoUbistvo.contains($action.getType()))
     then
-      $crime.setCrimeType(CrimeTypes.TESKO_UBISTVO);
-      update($crime)
+	  insert(new CrimeClasification(CrimeTypes.TESKO_UBISTVO));
 end
 
 rule "Ubistvo na mah"

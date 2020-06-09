@@ -29,4 +29,9 @@ public class Configurations extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/**")
 				.addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
 	}
+
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addRedirectViewController("/", "index.html");
+	}
 }

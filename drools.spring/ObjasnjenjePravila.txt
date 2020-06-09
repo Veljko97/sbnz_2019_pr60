@@ -1,0 +1,40 @@
+Sam koncep pravila je jednostavan. Ogranicio sam se na to da se korisniku prikaze samo jedan zlocin najveceg prioriteta.
+U svakom drl fajlu sam opisao kategoriju zlocina. Pravila imaju sledece formate:
+
+Inicializacija - maksimalni priorite i inicalizuje liste koje se koriste u odredjenim pravilima
+
+Osnovna pravila - sluze za zlocine koji nisu pod kategorija ni jednog drugog zlocina npr.
+
+rule "Ubistvo"
+	salience 1000
+    when
+       	$action: Action(type == ActionTypes.LISENJE_ZIVOTA.getValue())
+    then
+	  insert(new CrimeClasification(CrimeTypes.UBISTVO));
+end
+
+Podkategoriska pravila - sluze da se definisu pod kategorije tj. specifikacija odrdjenog zlocina imaju nizi priorited
+od Osnovnih pravila. Prvo se vrsi provera da li je nad zlocin ispunjen. npr.
+
+rule "Ubistvo na mah"
+	salience 10
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
+        Action( type == ActionTypes.DOVEDEN_U_STANJE_RADRAZENOSTI.getValue() )
+    then
+      $crime.setCrimeType(CrimeTypes.UBISTVO_NA_MAH);
+      update($crime)
+end
+
+Viseakciska pravila - dodatna kategorija kao mogucnost da vise akcija dovodi do iste klasifikacije zlocina.
+Lista akcija se definise u Inicializaciji.
+
+rule "Tesko Ubistvo"
+	salience 100
+    when
+        $action: Action( )
+        eval( teskoUbistvo.contains($action.getType()))
+    then
+	  insert(new CrimeClasification(CrimeTypes.TESKO_UBISTVO));
+end

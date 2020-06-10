@@ -56,9 +56,7 @@ function fire_ajax_submit() {
 
      $.ajax({
          type: "GET",
-         contentType: "application/json",
          url: "/actions?" + data,
-         dataType: 'json',
          cache: false,
          timeout: 600000,
          success: function (data) {

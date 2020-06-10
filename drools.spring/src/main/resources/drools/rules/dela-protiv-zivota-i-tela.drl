@@ -29,20 +29,33 @@ rule "Initialize"
 end
 
 rule "Ubistvo"
-	salience 1000
+	salience 1001
     when
        	$action: Action(type == ActionTypes.LISENJE_ZIVOTA.getValue())
     then
 	  insert(new CrimeClasification(CrimeTypes.UBISTVO));
 end
 
+
 rule "Tesko Ubistvo"
-	salience 100
+	salience 1000
     when
         $action: Action( )
         eval( teskoUbistvo.contains($action.getType()))
     then
 	  insert(new CrimeClasification(CrimeTypes.TESKO_UBISTVO));
+end
+
+rule "Tesko Ubistvo2"
+	salience 1000
+    when
+    	exists(CrimeClasification(crimeType == CrimeTypes.UBISTVO))
+    	$crime: CrimeClasification(crimeType == CrimeTypes.UBISTVO)
+        $action: Action( )
+        eval( teskoUbistvo.contains($action.getType()))
+    then
+      $crime.setCrimeType(CrimeTypes.TESKO_UBISTVO);
+      update($crime)
 end
 
 rule "Ubistvo na mah"

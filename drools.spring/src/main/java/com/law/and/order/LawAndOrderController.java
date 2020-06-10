@@ -30,7 +30,7 @@ public class LawAndOrderController {
         this.lawAndOrderService = sampleService;
     }
 
-    @RequestMapping(value = "/actions", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/actions", method = RequestMethod.GET)
     public ResponseEntity<?> getCrime(@RequestParam(required = false) ActionTypes[] actionTypes) {
 
         if (actionTypes == null || actionTypes.length == 0) {
@@ -38,7 +38,7 @@ public class LawAndOrderController {
         }
 
         CrimeClasification crimeClasification = lawAndOrderService.getCrime(actionTypes);
-        return ResponseEntity.ok(crimeClasification);
+        return ResponseEntity.ok(crimeClasification.toString());
     }
 
     @RequestMapping(value = "/getRules", method = RequestMethod.GET)

@@ -38,3 +38,6 @@ rule "Tesko Ubistvo"
     then
 	  insert(new CrimeClasification(CrimeTypes.TESKO_UBISTVO));
 end
+
+Jos planiram da za svaki zlocin ubacim minimalnu i maksimanu kaznu. U slucaju da ni to nije dovoljno mogu dodati jos
+mogucnost da se za svaki slucaj odaberu olaksavajuce i otezavajuce okolnosti koje bi smanjile minimalnu i maksimalnu kaznu.

@@ -61,7 +61,7 @@ function fire_ajax_submit() {
          timeout: 600000,
          success: function (data) {
 
-             var json = "Izvrsen zlocin je: " + data.crimeType;
+             var json = "Izvrsen zlocin je: " + data;
              $('#feedback').html(json);
 
              console.log("SUCCESS : ", data);

@@ -66,7 +66,7 @@ public class CrimeClasification {
 		if (maxMany){
 			zlocin += " Novcana Kazna";
 		}
-		return String.format("%s sa kaznom%s", crimeType.getValue(), zlocin.equals(":") ? "" : zlocin);
+		return String.format("%s %S", crimeType.getValue(), zlocin.equals(":") ? "" : "sa kaznom" +zlocin);
     }
 
     public CrimeTypes getCrimeType() {

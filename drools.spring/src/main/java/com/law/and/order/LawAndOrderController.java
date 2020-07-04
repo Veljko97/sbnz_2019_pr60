@@ -38,14 +38,18 @@ public class LawAndOrderController {
         }
 
         CrimeClasification crimeClasification = lawAndOrderService.getCrime(actionTypes);
-        return ResponseEntity.ok(crimeClasification.toString());
+        if (crimeClasification != null) {
+            return ResponseEntity.ok(crimeClasification.toString());
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @RequestMapping(value = "/getRules", method = RequestMethod.GET)
     public ResponseEntity<?> getRules(@RequestParam(required = true) String ruleSet) throws IOException {
         Resource resource = resourceLoaderService.resourceLoader.getResource("classpath:drools/rules/" + ruleSet + ".drl");
 //        File file = ResourceUtils.getFile("classpath:drools/rules/" + ruleSet + ".drl");
-        File file  = resource.getFile();
+        File file = resource.getFile();
         String text = "";
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
